@@ -5,5 +5,8 @@ require_relative './config/environment'
 # end 
 
 use Rack::MethodOverride 
+use SessionController 
+use UserController 
+use SurveyController 
 run ApplicationController
 
