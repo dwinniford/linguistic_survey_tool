@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_27_230532) do
+ActiveRecord::Schema.define(version: 2020_02_27_232107) do
 
   create_table "locations", force: :cascade do |t|
     t.string "province"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2020_02_27_230532) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "user_name"
+    t.string "name"
     t.string "password_digest"
   end
 
