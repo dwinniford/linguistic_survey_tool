@@ -24,17 +24,24 @@ class SessionsController < ApplicationController
         erb :'sessions/login'
     end 
 
-    post '/sessions' do 
-        session[:name] = params[:name]
-        if session[:name].length > 0  # add real authentication
-            redirect "/users"
+    post '/sessions' do   #refactor into helper methods?
+        if !params_empty? 
+            user = User.find_by_name(params[:name])
+            if user && user.authenticate(params[:password])
+                session[:id] = user.id
+                redirect '/surveys'
+            else 
+                @notice = "Invalid username or password."
+                erb :'/sessions/login'
+            end 
         else 
-            redirect "/login" # add user id in the uri
+            @notice = "Please fill all fields."
+            erb :'/sessions/login'
         end 
     end 
 
     get '/logout' do 
-        sessions.clear 
-        redirect :"/sessions/login"
+        session.clear 
+        redirect "/login"
     end 
 end 

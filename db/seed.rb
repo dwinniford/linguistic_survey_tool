@@ -1,0 +1,1 @@
+Survey.create(name: "Su Mama", gender: "f", age: 61, first_language: "zhuang", second_language: "local dialect", location_id: 1, user_id: 1)
