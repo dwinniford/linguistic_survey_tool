@@ -9,4 +9,14 @@ class SurveysController < ApplicationController
     get '/surveys/new' do 
         erb :"/surveys/new"
     end 
+
+    post '/surveys' do 
+        user = User.find_by_id(session[:id])
+        survey = Survey.create(params["survey"])
+        location = Location.create(params["location"])
+        location.surveys << survey 
+        user.surveys << survey
+        binding.pry
+        redirect "/surveys/#{survey.id}"
+    end 
 end 
