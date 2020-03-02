@@ -18,6 +18,12 @@ class ApplicationController < Sinatra::Base
         def logged_in?
             !!session[:user_id]
         end 
+
+        def params_empty?
+            params.any? do |k, v|
+                v.empty? 
+            end 
+        end 
     end 
     
 end 

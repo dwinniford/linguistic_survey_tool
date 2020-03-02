@@ -9,9 +9,10 @@ class SessionsController < ApplicationController
     end 
 
     post '/signup' do 
-        if params[:name].length > 0 && params[:password].length > 0 
-            User.create(params)
-            redirect '/login'
+        if !params_empty? 
+            user = User.create(params)
+            session[:id] = user.id
+            redirect '/surveys'
         else 
             redirect '/failure'
         end 
