@@ -14,7 +14,8 @@ class SessionsController < ApplicationController
             session[:id] = user.id
             redirect '/surveys'
         else 
-            redirect '/failure'
+            @notice = "Please fill all fields."
+            erb :'/sessions/signup'
         end 
     end 
 
