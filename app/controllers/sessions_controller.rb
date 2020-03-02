@@ -1,5 +1,9 @@
 class SessionsController < ApplicationController 
     
+    get '/' do 
+        erb :'sessions/index'
+    end 
+
     get '/signup' do 
         erb :'sessions/signup'
     end 
