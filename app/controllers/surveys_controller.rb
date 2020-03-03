@@ -12,6 +12,7 @@ class SurveysController < ApplicationController
 
     get '/surveys/new' do 
         if logged_in?
+            @locations = Location.all 
             erb :"/surveys/new"
         else 
             redirect '/'
@@ -23,7 +24,6 @@ class SurveysController < ApplicationController
         if valid_input?
             survey = Survey.create(params["survey"])
             location = Location.find_or_create_by(params["location"])
-            binding.pry
             location.surveys << survey 
             user.surveys << survey            
             redirect "/surveys/#{survey.id}"
@@ -61,9 +61,7 @@ class SurveysController < ApplicationController
         @survey = Survey.find_by_id(params[:id])
         if valid_input?
             @survey.update(params["survey"])
-            
             location = Location.find_or_create_by(params["location"])
-
             location.surveys << @survey 
             redirect "/surveys/#{@survey.id}"
         else 
