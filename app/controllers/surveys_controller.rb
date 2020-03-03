@@ -24,4 +24,9 @@ class SurveysController < ApplicationController
         @survey = Survey.find_by_id(params[:id])
         erb :'/surveys/show'
     end
+
+    get '/surveys/:id/edit' do 
+        @survey = Survey.find_by_id(params[:id])
+        erb :'/surveys/edit'
+    end
 end 

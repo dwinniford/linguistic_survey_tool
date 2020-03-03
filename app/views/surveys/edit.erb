@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Edit Survey Form</h1>
+
+<form method="post" action="/surveys">
+<input type="hidden" name="_method" value="patch">
+<label>Name: </label>
+<input type="text" name="survey[name]" value="<%= @survey.name %>">
+<br>
+<label>Gender: </label>
+<input type="text" name="survey[gender]" value="<%= @survey.gender %>">
+<br>
+<label>Age: </label>
+<input type="integer" name="survey[age]" value="<%= @survey.age %>">
+<br>
+<label>First language: </label>
+<input type="text" name="survey[first_language]" value="<%= @survey.first_language %>">
+<br>
+<label>Second language: </label>
+<input type="text" name="survey[second_language]" value="<%= @survey.second_language  %>">
+<br>
+<label>Province: </label>
+<input type="text" name="location[province]" value="<%= @survey.location.province %>">
+<br>
+<label>County: </label>
+<input type="text" name="location[county]" value="<%= @survey.location.county %>">
+<br>
+<label>Village: </label>
+<input type="text" name="location[village]" value="<%= @survey.location.village %>">
+<br>
+<button type="submit">Submit</button>
+</body>
+</html>

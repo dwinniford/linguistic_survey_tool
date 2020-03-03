@@ -20,5 +20,8 @@
         <li>County: <%= @survey.location.county %></li>
         <li>Village: <%= @survey.location.village %></li>
     </ul>
+    <a href="/surveys/<%= @survey.id %>/edit">Edit Survey</a>
+    <br>
+    <a href="/surveys/<%= @survey.id %>/delete">Delete Survey</a>
 </body>
 </html>
