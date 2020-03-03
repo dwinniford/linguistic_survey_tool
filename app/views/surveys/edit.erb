@@ -14,7 +14,8 @@
 <input type="text" name="survey[name]" value="<%= @survey.name %>">
 <br>
 <label>Gender: </label>
-<input type="text" name="survey[gender]" value="<%= @survey.gender %>">
+<input type="radio" name="survey[gender]" value="m" <%= "checked" if @survey.gender == "m" %> >male
+<input type="radio" name="survey[gender]" value="f" <%= "checked" if @survey.gender == "f" %> >female
 <br>
 <label>Age: </label>
 <input type="integer" name="survey[age]" value="<%= @survey.age %>">
