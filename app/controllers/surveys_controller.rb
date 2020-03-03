@@ -19,4 +19,9 @@ class SurveysController < ApplicationController
         binding.pry
         redirect "/surveys/#{survey.id}"
     end 
+
+    get '/surveys/:id' do 
+        @survey = Survey.find_by_id(params[:id])
+        erb :'/surveys/show'
+    end
 end 
