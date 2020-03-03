@@ -8,7 +8,7 @@
 <body>
     <h1>Edit Survey Form</h1>
 
-<form method="post" action="/surveys/<%= @survey.id %>/edit">
+<form method="post" action="/surveys/<%= @survey.id %>">
 <input type="hidden" name="_method" value="patch">
 <label>Name: </label>
 <input type="text" name="survey[name]" value="<%= @survey.name %>">

@@ -30,7 +30,7 @@ class SurveysController < ApplicationController
         erb :'/surveys/edit'
     end
 
-    patch '/surveys/:id/edit' do 
+    patch '/surveys/:id' do 
         @survey = Survey.find_by_id(params[:id])
         @survey.update(params["survey"])
         @survey.location.update(params["location"])

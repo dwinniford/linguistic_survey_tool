@@ -1,3 +1,18 @@
-<h1>All Surveys</h1>
-<a href='/logout'>Logout</a>
-<a href='/surveys/new'>New Survey</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>All Surveys</h1>
+    <a href='/logout'>Logout</a>
+    <a href='/surveys/new'>New Survey</a>
+    <ol>
+        <% @surveys.each do |survey| %>
+            <li>Name: <%= survey.name %>, Location: <%= survey.location.complete_name %></li>
+        <% end %>
+    </ol>
+</body>
+</html>
