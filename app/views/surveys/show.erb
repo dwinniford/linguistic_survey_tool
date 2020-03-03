@@ -22,6 +22,9 @@
     </ul>
     <a href="/surveys/<%= @survey.id %>/edit">Edit Survey</a>
     <br>
-    <a href="/surveys/<%= @survey.id %>/delete">Delete Survey</a>
+    <form action="/surveys/<%= @survey.id %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <button>Delete Survey</button>
+    </form>
 </body>
 </html>

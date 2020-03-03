@@ -16,7 +16,7 @@ class SurveysController < ApplicationController
         location = Location.create(params["location"])
         location.surveys << survey 
         user.surveys << survey
-        binding.pry
+        
         redirect "/surveys/#{survey.id}"
     end 
 
@@ -32,9 +32,14 @@ class SurveysController < ApplicationController
 
     patch '/surveys/:id/edit' do 
         @survey = Survey.find_by_id(params[:id])
-        # @location = Location.find_by(params["location"])
         @survey.update(params["survey"])
         @survey.location.update(params["location"])
         redirect "/surveys/#{@survey.id}"
+    end
+
+    delete '/surveys/:id' do 
+        @survey = Survey.find_by_id(params[:id])
+        @survey.destroy
+        redirect "/surveys"
     end
 end 
