@@ -26,8 +26,14 @@ class SurveysController < ApplicationController
     end
 
     get '/surveys/:id/edit' do 
+        # add validation
         @survey = Survey.find_by_id(params[:id])
-        erb :'/surveys/edit'
+        if @survey.user == current_user 
+            erb :'/surveys/edit'
+        else 
+            @notice = "You do not have permission to edit this survey."
+            erb :"/surveys/show"
+        end 
     end
 
     patch '/surveys/:id' do 
