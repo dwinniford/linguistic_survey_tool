@@ -45,7 +45,13 @@ class SurveysController < ApplicationController
 
     delete '/surveys/:id' do 
         @survey = Survey.find_by_id(params[:id])
-        @survey.destroy
-        redirect "/surveys"
+        if @survey.user == current_user 
+            @survey.destroy
+            redirect "/surveys"
+        else 
+            @notice = "You do not have permission to delete this survey."
+            erb :"/surveys/show"
+        end 
+
     end
 end 
