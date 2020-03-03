@@ -10,9 +10,14 @@ class SessionsController < ApplicationController
 
     post '/signup' do 
         if !params_empty? 
-            user = User.create(params)
-            session[:id] = user.id
-            redirect '/surveys'
+            if !User.find_by(name: params["name"])
+                user = User.create(params)
+                session[:id] = user.id
+                redirect '/surveys'
+            else 
+                @notice = "User name already exists."
+                erb :'/sessions/signup'
+            end 
         else 
             @notice = "Please fill all fields."
             erb :'/sessions/signup'
