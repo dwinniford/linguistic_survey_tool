@@ -3,29 +3,29 @@
 
 <form method="post" action="/surveys">
 <label>Name: </label>
-<input type="text" name="survey[name]">
+<input type="text" name="survey[name]" required>
 <br>
 <label>Gender: </label>
-<input type="radio" name="survey[gender]" value="m">male
-<input type="radio" name="survey[gender]" value="f">female
+<input type="radio" name="survey[gender]" value="m" required>male
+<input type="radio" name="survey[gender]" value="f" required>female
 <br>
 <label>Age: </label>
-<input type="integer" name="survey[age]">
+<input type="integer" name="survey[age]" required>
 <br>
 <label>First language: </label>
-<input type="text" name="survey[first_language]">
+<input type="text" name="survey[first_language]" required>
 <br>
 <label>Second language: </label>
-<input type="text" name="survey[second_language]">
+<input type="text" name="survey[second_language]" required>
 <br>
 <label>Province: </label>
-<input type="text" name="location[province]">
+<input type="text" name="location[province]" required>
 <br>
 <label>County: </label>
-<input type="text" name="location[county]">
+<input type="text" name="location[county]" required>
 <br>
 <label>Village: </label>
-<input type="text" name="location[village]">
+<input type="text" name="location[village]" required>
 <br>
 <button type="submit">Submit</button>
 
