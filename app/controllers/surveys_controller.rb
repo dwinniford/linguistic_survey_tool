@@ -20,12 +20,16 @@ class SurveysController < ApplicationController
 
     post '/surveys' do 
         user = User.find_by_id(session[:id])
-        survey = Survey.create(params["survey"])
-        location = Location.create(params["location"])
-        location.surveys << survey 
-        user.surveys << survey
-        
-        redirect "/surveys/#{survey.id}"
+        if valid_input?
+            survey = Survey.create(params["survey"])
+            location = Location.create(params["location"])
+            location.surveys << survey 
+            user.surveys << survey            
+            redirect "/surveys/#{survey.id}"
+        else 
+            @notice = "Invalid input. Please try again."
+            erb :"surveys/new"
+        end 
     end 
 
     get '/surveys/:id' do 

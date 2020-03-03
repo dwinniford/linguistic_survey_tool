@@ -29,7 +29,7 @@ class SessionsController < ApplicationController
         erb :'sessions/login'
     end 
 
-    post '/sessions' do   #refactor into helper methods?
+    post '/login' do   #refactor into helper methods?
         if !params_empty? 
             user = User.find_by_name(params[:name])
             if user && user.authenticate(params[:password])
@@ -47,6 +47,6 @@ class SessionsController < ApplicationController
 
     get '/logout' do 
         session.clear 
-        redirect "/login"
+        redirect "/"
     end 
 end 
