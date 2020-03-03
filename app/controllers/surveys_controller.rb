@@ -1,13 +1,21 @@
 class SurveysController < ApplicationController
 
     get '/surveys' do 
-        @surveys = Survey.all 
-        @user = User.find_by_id(session[:id])
-        erb :"/surveys/index"
+        if logged_in? 
+            @surveys = Survey.all 
+            @user = User.find_by_id(session[:id])
+            erb :"/surveys/index"
+        else
+            redirect '/'
+        end 
     end 
 
     get '/surveys/new' do 
-        erb :"/surveys/new"
+        if logged_in?
+            erb :"/surveys/new"
+        else 
+            redirect '/'
+        end 
     end 
 
     post '/surveys' do 
@@ -21,18 +29,26 @@ class SurveysController < ApplicationController
     end 
 
     get '/surveys/:id' do 
-        @survey = Survey.find_by_id(params[:id])
-        erb :'/surveys/show'
+        if logged_in?
+            @survey = Survey.find_by_id(params[:id])
+            erb :'/surveys/show'
+        else 
+            redirect '/'
+        end 
     end
 
     get '/surveys/:id/edit' do 
         # add validation
-        @survey = Survey.find_by_id(params[:id])
-        if @survey.user == current_user 
-            erb :'/surveys/edit'
+        if logged_in?
+            @survey = Survey.find_by_id(params[:id])
+            if @survey.user == current_user 
+                erb :'/surveys/edit'
+            else 
+                @notice = "You do not have permission to edit this survey."
+                erb :"/surveys/show"
+            end 
         else 
-            @notice = "You do not have permission to edit this survey."
-            erb :"/surveys/show"
+            redirect '/'
         end 
     end
 
