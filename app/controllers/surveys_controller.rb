@@ -29,4 +29,12 @@ class SurveysController < ApplicationController
         @survey = Survey.find_by_id(params[:id])
         erb :'/surveys/edit'
     end
+
+    patch '/surveys/:id/edit' do 
+        @survey = Survey.find_by_id(params[:id])
+        # @location = Location.find_by(params["location"])
+        @survey.update(params["survey"])
+        @survey.location.update(params["location"])
+        redirect "/surveys/#{@survey.id}"
+    end
 end 
