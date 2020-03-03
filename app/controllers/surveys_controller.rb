@@ -58,9 +58,14 @@ class SurveysController < ApplicationController
 
     patch '/surveys/:id' do 
         @survey = Survey.find_by_id(params[:id])
-        @survey.update(params["survey"])
-        @survey.location.update(params["location"])
-        redirect "/surveys/#{@survey.id}"
+        if valid_input?
+            @survey.update(params["survey"])
+            @survey.location.update(params["location"])
+            redirect "/surveys/#{@survey.id}"
+        else 
+            @notice = "Invalid input. Please try again."
+            erb :"/surveys/edit"
+        end 
     end
 
     delete '/surveys/:id' do 
