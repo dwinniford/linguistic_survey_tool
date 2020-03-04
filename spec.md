@@ -2,10 +2,10 @@
 
 Specs:
 - [x] Use Sinatra to build the app
-- [ ] Use ActiveRecord for storing information in a database
-- [ ] Include more than one model class (e.g. User, Post, Category)
-- [ ] Include at least one has_many relationship on your User model (e.g. User has_many Posts)
-- [ ] Include at least one belongs_to relationship on another model (e.g. Post belongs_to User)
+- [x] Use ActiveRecord for storing information in a database - users are stored at signup, location and survey are created and stored on the new survey form.
+- [x] Include more than one model class (e.g. User, Post, Category) - includes User, Location, and Survey classes.
+- [x] Include at least one has_many relationship on your User model (e.g. User has_many Posts) - User and Location both has many surveys.  
+- [X] Include at least one belongs_to relationship on another model (e.g. Post belongs_to User) - Survey belongs to a Location and a User.
 - [ ] Include user accounts with unique login attribute (username or email)
 - [ ] Ensure that the belongs_to resource has routes for Creating, Reading, Updating and Destroying
 - [ ] Ensure that users can't modify content created by other users

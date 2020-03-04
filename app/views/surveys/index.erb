@@ -7,9 +7,7 @@
 </head>
 <body>
     <h1>All Surveys</h1>
-    <a href='/logout'>Logout</a>
-    <a href='/surveys/new'>New Survey</a>
-    <a href="/locations">View Locations</a>
+    
     <ol>
         <% @surveys.each do |survey| %>
             <li>Name: <%= survey.name %>, Location: <%= survey.location.complete_name %> <a href="/surveys/<%= survey.id %>" type=><button>View Survey</button></a></li>
