@@ -30,14 +30,10 @@ class SurveysController < ApplicationController
         else 
             @survey.build_location(params["location"])
         end  
-            #need something like find or build location. try uniqueness validation of conditional statement with find 
-        # @location = Location.find_or_initialize_by(params["location"])  # refactor params to be one step? params["survey"]["location"]
-        if @survey.save # only checks to validate suvey
-            #&& @location.save # this doesn't work because if the first evaluates false the second will not be evaluated.  alse creates possibility of survey being persisted without a location
+        if @survey.save 
             user.surveys << @survey            
             redirect "/surveys/#{@survey.id}"
         else 
-            # @survey.location.valid?
             erb :"surveys/new"
         end 
     end 
@@ -52,7 +48,6 @@ class SurveysController < ApplicationController
     end
 
     get '/surveys/:id/edit' do 
-        # add validation
         if logged_in?
             @survey = Survey.find_by_id(params[:id])
             if @survey.user == current_user 
@@ -68,15 +63,27 @@ class SurveysController < ApplicationController
 
     patch '/surveys/:id' do 
         @survey = Survey.find_by_id(params[:id])
-        if valid_input?
-            @survey.update(params["survey"])
-            location = Location.find_or_create_by(params["location"])
-            location.surveys << @survey 
+        location = Location.find_by(params["location"])
+        if location 
+            @survey.location= location 
+        else 
+            @survey.build_location(params["location"])
+        end  
+        if @survey.update(params["survey"])             
             redirect "/surveys/#{@survey.id}"
         else 
-            @notice = "Invalid input. Please try again."
-            erb :"/surveys/edit"
+            erb :"surveys/edit"
         end 
+
+        # if valid_input?
+        #     @survey.update(params["survey"])
+        #     location = Location.find_or_create_by(params["location"])
+        #     location.surveys << @survey 
+        #     redirect "/surveys/#{@survey.id}"
+        # else 
+        #     @notice = "Invalid input. Please try again."
+        #     erb :"/surveys/edit"
+        # end 
     end
 
     delete '/surveys/:id' do 
