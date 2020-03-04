@@ -6,10 +6,13 @@
     <title>Document</title>
 </head>
 <body>
+<% if session[:id]  %>
+    <p>Logged in as: <%= current_user.name %></p>
     <a href='/logout'>Logout</a>
     <a href='/surveys/new'>New Survey</a>
     <a href="/locations">Locations</a>
     <a href="/surveys">Surveys</a>
+<% end %>
      <%= yield %>
 </body>
 </html>

@@ -3,7 +3,7 @@ class SurveysController < ApplicationController
     get '/surveys' do 
         if logged_in? 
             @surveys = Survey.all 
-            @user = User.find_by_id(session[:id])
+            @user = current_user 
             erb :"/surveys/index"
         else
             redirect '/'
