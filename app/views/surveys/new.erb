@@ -9,30 +9,30 @@
 
 <form method="post" action="/surveys">
 <label>Name: </label>
-<input type="text" name="survey[name]">
+<input type="text" name="survey[name]" value="<%= @survey.name %>">
 <br>
 <label>Gender: </label>
-<input type="radio" name="survey[gender]" value="m">male
-<input type="radio" name="survey[gender]" value="f">female
+<input type="radio" name="survey[gender]" value="m" <%= "checked" if @survey.gender == "m" %>>male
+<input type="radio" name="survey[gender]" value="f"<%= "checked" if @survey.gender == "f" %>>female
 <br>
 <label>Age: </label>
-<input type="integer" name="survey[age]">
+<input type="integer" name="survey[age]" value="<%= @survey.age %>">
 <br>
 <label>First language: </label>
-<input type="text" name="survey[first_language]">
+<input type="text" name="survey[first_language]" value="<%= @survey.first_language %>">
 <br>
 <label>Second language: </label>
-<input type="text" name="survey[second_language]">
+<input type="text" name="survey[second_language]" value="<%= @survey.second_language %>">
 <br>
 <h3>Location:</h3>
 <label>Province: </label>
-<input type="text" name="location[province]">
+<input type="text" name="location[province]" value="<%= @survey.location.province %>">
 <br>
 <label>County: </label>
-<input type="text" name="location[county]">
+<input type="text" name="location[county]" value="<%= @survey.location.county %>">
 <br>
 <label>Village: </label>
-<input type="text" name="location[village]">
+<input type="text" name="location[village]" value="<%= @survey.location.village %>">
 <br>
 <button type="submit">Submit</button>
 
