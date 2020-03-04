@@ -24,13 +24,14 @@ class SessionsController < ApplicationController
         erb :'sessions/login'
     end 
 
-    post '/login' do   #refactor into helper methods?
+    post '/login' do   #refactor into helper methods? 
         if !params_empty? 
             user = User.find_by_name(params[:name])
             if user && user.authenticate(params[:password])
                 session[:id] = user.id
                 redirect '/surveys'
             else 
+                raise user.errors.inspect
                 @notice = "Invalid username or password."
                 erb :'/sessions/login'
             end 

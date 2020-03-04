@@ -1,22 +1,24 @@
 <h1>New Survey Form</h1>
-<p><%= @notice %></p>
+<% @survey.errors.full_messages.each do |m| %>
+    <p><%= m %></p>
+<% end %>
 
 <form method="post" action="/surveys">
 <label>Name: </label>
-<input type="text" name="survey[name]" required>
+<input type="text" name="survey[name]">
 <br>
 <label>Gender: </label>
-<input type="radio" name="survey[gender]" value="m" required>male
-<input type="radio" name="survey[gender]" value="f" required>female
+<input type="radio" name="survey[gender]" value="m">male
+<input type="radio" name="survey[gender]" value="f">female
 <br>
 <label>Age: </label>
-<input type="integer" name="survey[age]" required>
+<input type="integer" name="survey[age]">
 <br>
 <label>First language: </label>
-<input type="text" name="survey[first_language]" required>
+<input type="text" name="survey[first_language]">
 <br>
 <label>Second language: </label>
-<input type="text" name="survey[second_language]" required>
+<input type="text" name="survey[second_language]">
 <br>
 <h3>Location:</h3>
 <label>Province: </label>

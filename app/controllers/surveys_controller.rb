@@ -11,6 +11,7 @@ class SurveysController < ApplicationController
     end 
 
     get '/surveys/new' do 
+        @survey = Survey.new 
         if logged_in?
             @locations = Location.all 
             erb :"/surveys/new"
@@ -21,14 +22,13 @@ class SurveysController < ApplicationController
 
     post '/surveys' do 
         user = User.find_by_id(session[:id])
-        if valid_input?
-            survey = Survey.create(params["survey"])
+        @survey = Survey.new(params["survey"])
+        if @survey.save
             location = Location.find_or_create_by(params["location"])
             location.surveys << survey 
             user.surveys << survey            
             redirect "/surveys/#{survey.id}"
         else 
-            @notice = "Invalid input. Please try again."
             erb :"surveys/new"
         end 
     end 
