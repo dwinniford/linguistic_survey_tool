@@ -24,7 +24,7 @@ class SurveysController < ApplicationController
     post '/surveys' do 
         user = User.find_by_id(session[:id])
         @survey = Survey.new(params["survey"])
-        @survey.build_location(params["location"]) #need something like find or build location
+        @survey.build_location(params["location"]) #need something like find or build location. try uniqueness validation of conditional statement with find 
         # @location = Location.find_or_initialize_by(params["location"])  # refactor params to be one step? params["survey"]["location"]
         if @survey.save # only checks to validate suvey
             #&& @location.save # this doesn't work because if the first evaluates false the second will not be evaluated.  alse creates possibility of survey being persisted without a location
