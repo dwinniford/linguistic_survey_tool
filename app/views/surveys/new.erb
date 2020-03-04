@@ -2,6 +2,10 @@
 <% @survey.errors.full_messages.each do |m| %>
     <p><%= m %></p>
 <% end %>
+<% @survey.location.errors.full_messages.each do |m| %>
+    <p><%= m %></p>
+<% end %>
+
 
 <form method="post" action="/surveys">
 <label>Name: </label>
@@ -22,13 +26,13 @@
 <br>
 <h3>Location:</h3>
 <label>Province: </label>
-<input type="text" name="location[province]" required>
+<input type="text" name="location[province]">
 <br>
 <label>County: </label>
-<input type="text" name="location[county]" required>
+<input type="text" name="location[county]">
 <br>
 <label>Village: </label>
-<input type="text" name="location[village]" required>
+<input type="text" name="location[village]">
 <br>
 <button type="submit">Submit</button>
 
