@@ -22,8 +22,10 @@ class SurveysController < ApplicationController
     end 
 
     post '/surveys' do 
+        # if  logged_in?
         user = User.find_by_id(session[:id])
         @survey = Survey.new(params["survey"])
+        # params["survey"]["location"]
         location = Location.find_by(params["location"])
         if location 
             @survey.location= location 
@@ -62,7 +64,9 @@ class SurveysController < ApplicationController
     end
 
     patch '/surveys/:id' do 
+        #if logged_in?
         @survey = Survey.find_by_id(params[:id])
+        #if current_user = @survey.user_id?
         location = Location.find_by(params["location"])
         if location 
             @survey.location= location 
@@ -88,6 +92,7 @@ class SurveysController < ApplicationController
 
     delete '/surveys/:id' do 
         @survey = Survey.find_by_id(params[:id])
+                # if logged_in? and current_user = params[:user_id]
         if @survey.user == current_user 
             @survey.destroy
             redirect "/surveys"
