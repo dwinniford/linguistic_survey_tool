@@ -1,31 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Survey Details</h1>
-    <p><%= @notice %></p>  
-    <h3>by: <%= @survey.user.name %></h3>
+
+    <header>
+        <h1>Survey Details</h1>
+        <p><%= @notice %></p>  
+        <h3>by: <%= @survey.user.name %></h3>
+    </header>
     <br>
     <%# would look better as a table %>
-    <ul>
-        <li>Name: <%= @survey.name %></li>
-        <li>Gender: <%= @survey.gender %></li>
-        <li>Age: <%= @survey.age %></li>
-        <li>First language: <%= @survey.first_language %></li>
-        <li>Second langage: <%= @survey.second_language %></li>
-        <li>Province: <%= @survey.location.province %></li>
-        <li>County: <%= @survey.location.county %></li>
-        <li>Village: <%= @survey.location.village %></li>
-    </ul>
-    <a href="/surveys/<%= @survey.id %>/edit"><button>Edit Survey</button></a>
-    <br>
-    <form action="/surveys/<%= @survey.id %>" method="post">
-    <input type="hidden" name="_method" value="delete">
-    <button>Delete Survey</button>
-    </form>
-</body>
+    <main>
+        <ul>
+            <li>Name: <%= @survey.name %></li>
+            <li>Gender: <%= @survey.gender %></li>
+            <li>Age: <%= @survey.age %></li>
+            <li>First language: <%= @survey.first_language %></li>
+            <li>Second langage: <%= @survey.second_language %></li>
+            <li>Province: <%= @survey.location.province %></li>
+            <li>County: <%= @survey.location.county %></li>
+            <li>Village: <%= @survey.location.village %></li>
+        </ul>
+        <a href="/surveys/<%= @survey.id %>/edit"><button>Edit Survey</button></a>
+        <br>
+        <form action="/surveys/<%= @survey.id %>" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <button>Delete Survey</button>
+        </form>
+    </main>
+
 </html>

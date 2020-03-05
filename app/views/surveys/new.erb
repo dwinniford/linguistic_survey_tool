@@ -1,39 +1,45 @@
-<h1>New Survey Form</h1>
-<% @survey.errors.full_messages.each do |m| %>
-    <p><%= m %></p>
-<% end %>
-<% @survey.location.errors.full_messages.each do |m| %>
-    <p><%= m %></p>
-<% end %>
+<!DOCTYPE html>
+<html lang="en">
+<header>
+    <h1>New Survey Form</h1>
+    <% @survey.errors.full_messages.each do |m| %>
+        <p><%= m %></p>
+    <% end %>
+    <% @survey.location.errors.full_messages.each do |m| %>
+        <p><%= m %></p>
+    <% end %>
+</header>
 
+<main>
+    <form method="post" action="/surveys">
+        <label for="survey[name]">Name: </label>
+        <input type="text" name="survey[name]" value="<%= @survey.name %>" required>
+        <br>
+        <label for="survey[gender]">Gender: </label>
+        <input type="radio" name="survey[gender]" value="m" <%= "checked" if @survey.gender == "m" %> required>male
+        <input type="radio" name="survey[gender]" value="f"<%= "checked" if @survey.gender == "f" %> required>female
+        <br>
+        <label for="survey[age]">Age: </label>
+        <input type="integer" name="survey[age]" value="<%= @survey.age %>" required>
+        <br>
+        <label for="survey[first_language]">First language: </label>
+        <input type="text" name="survey[first_language]" value="<%= @survey.first_language %>" required>
+        <br>
+        <label for="survey[second_language]">Second language: </label>
+        <input type="text" name="survey[second_language]" value="<%= @survey.second_language %>" required>
+        <br>
+        <h3>Location:</h3>
+        <label for="location[province]">Province: </label>
+        <input type="text" name="location[province]" value="<%= @survey.location.province %>" required>
+        <br>
+        <label for="location[county]">County: </label>
+        <input type="text" name="location[county]" value="<%= @survey.location.county %>" required>
+        <br>
+        <label for="location[village]">Village: </label>
+        <input type="text" name="location[village]" value="<%= @survey.location.village %>" required>
+        <br>
+        <button type="submit">Submit</button>
 
-<form method="post" action="/surveys">
-<label>Name: </label>
-<input type="text" name="survey[name]" value="<%= @survey.name %>" required>
-<br>
-<label>Gender: </label>
-<input type="radio" name="survey[gender]" value="m" <%= "checked" if @survey.gender == "m" %> required>male
-<input type="radio" name="survey[gender]" value="f"<%= "checked" if @survey.gender == "f" %> required>female
-<br>
-<label>Age: </label>
-<input type="integer" name="survey[age]" value="<%= @survey.age %>" required>
-<br>
-<label>First language: </label>
-<input type="text" name="survey[first_language]" value="<%= @survey.first_language %>" required>
-<br>
-<label>Second language: </label>
-<input type="text" name="survey[second_language]" value="<%= @survey.second_language %>" required>
-<br>
-<h3>Location:</h3>
-<label>Province: </label>
-<input type="text" name="location[province]" value="<%= @survey.location.province %>" required>
-<br>
-<label>County: </label>
-<input type="text" name="location[county]" value="<%= @survey.location.county %>" required>
-<br>
-<label>Village: </label>
-<input type="text" name="location[village]" value="<%= @survey.location.village %>" required>
-<br>
-<button type="submit">Submit</button>
-
-</form>
+    </form>
+</main>
+</html>
