@@ -3,16 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Survey Tool</title>
 </head>
+<style>
+    .container {
+        display: grid;
+        background-color: aliceblue;
+        gap: 20px;
+        grid-template-columns: auto auto auto auto auto;
+    }
+</style>
 <body>
+<div class="container">
 <% if session[:id]  %>
-    <p>Logged in as: <%= current_user.name %></p>
-    <a href='/logout'>Logout</a>
-    <a href='/surveys/new'>New Survey</a>
-    <a href="/locations">Locations</a>
-    <a href="/surveys">Surveys</a>
+    <div class="item">Logged in as: <%= current_user.name %></div>
+    <div class="item"><a href='/logout'>Logout</a></div>
+    <div class="item"><a href='/surveys/new'>New Survey</a></div>
+    <div class="item"><a href="/locations">Locations</a></div>
+    <div class="item"><a href="/surveys">Surveys</a></div>
 <% end %>
+</div>
      <%= yield %>
 </body>
 </html>
