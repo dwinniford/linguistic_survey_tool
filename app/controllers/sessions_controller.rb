@@ -5,8 +5,14 @@ class SessionsController < ApplicationController
     end 
 
     get '/signup' do 
-        @user = User.new
-        erb :'sessions/signup'
+        if logged_in? 
+            # @notice = "You are already logged in."  use flash?
+            redirect '/surveys'
+        else 
+            @user = User.new
+            erb :'sessions/signup'
+        end
+        
     end 
 
     post '/signup' do 
@@ -21,7 +27,11 @@ class SessionsController < ApplicationController
 
     
     get '/login' do 
-        erb :'sessions/login'
+        if logged_in?
+            redirect '/surveys'
+        else 
+            erb :'sessions/login'
+        end
     end 
 
     post '/login' do   #refactor into helper methods? 
