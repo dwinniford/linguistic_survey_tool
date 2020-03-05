@@ -11,9 +11,9 @@ class SurveysController < ApplicationController
     end 
 
     get '/surveys/new' do 
-        @survey = Survey.new 
-        @survey.build_location
         if logged_in?
+            @survey = Survey.new 
+            @survey.build_location
             @locations = Location.all 
             erb :"/surveys/new"
         else 
@@ -22,21 +22,24 @@ class SurveysController < ApplicationController
     end 
 
     post '/surveys' do 
-        # if  logged_in?
-        user = User.find_by_id(session[:id])
-        @survey = Survey.new(params["survey"])
-        # params["survey"]["location"]
-        location = Location.find_by(params["location"])
-        if location 
-            @survey.location= location 
+        if  logged_in?
+            user = User.find_by_id(session[:id]) # replace with current_user
+            @survey = Survey.new(params["survey"])
+            # params["survey"]["location"]
+            location = Location.find_by(params["location"])
+            if location 
+                @survey.location= location 
+            else 
+                @survey.build_location(params["location"])
+            end  
+            if @survey.save 
+                user.surveys << @survey            
+                redirect "/surveys/#{@survey.id}"
+            else 
+                erb :"surveys/new"
+            end 
         else 
-            @survey.build_location(params["location"])
-        end  
-        if @survey.save 
-            user.surveys << @survey            
-            redirect "/surveys/#{@survey.id}"
-        else 
-            erb :"surveys/new"
+            redirect '/'
         end 
     end 
 
@@ -64,19 +67,25 @@ class SurveysController < ApplicationController
     end
 
     patch '/surveys/:id' do 
-        #if logged_in?
-        @survey = Survey.find_by_id(params[:id])
-        #if current_user = @survey.user_id?
-        location = Location.find_by(params["location"])
-        if location 
-            @survey.location= location 
+        if logged_in?
+            @survey = Survey.find_by_id(params[:id])
+            if current_user = @survey.user
+                location = Location.find_by(params["location"])
+                if location 
+                    @survey.location= location 
+                else 
+                    @survey.build_location(params["location"])
+                end  
+                if @survey.update(params["survey"])             
+                    redirect "/surveys/#{@survey.id}"
+                else 
+                    erb :"surveys/edit"
+                end 
+            else 
+                redirect "/surveys/#{@survey.id}"
+            end 
         else 
-            @survey.build_location(params["location"])
-        end  
-        if @survey.update(params["survey"])             
-            redirect "/surveys/#{@survey.id}"
-        else 
-            erb :"surveys/edit"
+            redirect '/'
         end 
 
         # if valid_input?
@@ -91,14 +100,17 @@ class SurveysController < ApplicationController
     end
 
     delete '/surveys/:id' do 
-        @survey = Survey.find_by_id(params[:id])
-                # if logged_in? and current_user = params[:user_id]
-        if @survey.user == current_user 
-            @survey.destroy
-            redirect "/surveys"
+        if logged_in?
+            @survey = Survey.find_by_id(params[:id])
+            if @survey.user == current_user 
+                @survey.destroy
+                redirect "/surveys"
+            else 
+                @notice = "You do not have permission to delete this survey."
+                erb :"/surveys/show"
+            end 
         else 
-            @notice = "You do not have permission to delete this survey."
-            erb :"/surveys/show"
+            redirect '/' # or display anti hacker page
         end 
 
     end
