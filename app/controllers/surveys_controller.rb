@@ -3,7 +3,6 @@ class SurveysController < ApplicationController
     get '/surveys' do 
         if logged_in? 
             @surveys = Survey.all 
-            @user = current_user 
             erb :"/surveys/index"
         else
             redirect '/'
@@ -23,7 +22,6 @@ class SurveysController < ApplicationController
 
     post '/surveys' do 
         if  logged_in?
-            user = User.find_by_id(session[:id]) # replace with current_user
             @survey = Survey.new(params["survey"])
             # params["survey"]["location"]
             location = Location.find_by(params["location"])
@@ -33,7 +31,7 @@ class SurveysController < ApplicationController
                 @survey.build_location(params["location"])
             end  
             if @survey.save 
-                user.surveys << @survey            
+                current_user.surveys << @survey            
                 redirect "/surveys/#{@survey.id}"
             else 
                 erb :"surveys/new"
@@ -87,16 +85,6 @@ class SurveysController < ApplicationController
         else 
             redirect '/'
         end 
-
-        # if valid_input?
-        #     @survey.update(params["survey"])
-        #     location = Location.find_or_create_by(params["location"])
-        #     location.surveys << @survey 
-        #     redirect "/surveys/#{@survey.id}"
-        # else 
-        #     @notice = "Invalid input. Please try again."
-        #     erb :"/surveys/edit"
-        # end 
     end
 
     delete '/surveys/:id' do 
