@@ -5,25 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Survey Tool</title>
 </head>
+
 <style>
     .container {
         display: grid;
         background-color: aliceblue;
         gap: 20px;
-        grid-template-columns: auto auto auto auto auto;
+        grid-template-columns: auto auto auto auto;
     }
 </style>
-<body>
-<div class="container">
-<% if session[:id]  %>
+
+<header>
+
+<% if logged_in?  %>
     <div class="item">Logged in as: <%= current_user.name %></div>
-    <div class="item"><a href='/logout'>Logout</a></div>
-    <div class="item"><a href='/surveys/new'>New Survey</a></div>
-    <div class="item"><a href="/locations">Locations</a></div>
-    <div class="item"><a href="/surveys">Surveys</a></div>
+    <nav class="container">
+        <div class="item"><a href='/logout'>Logout</a></div>
+        <div class="item"><a href='/surveys/new'>New Survey</a></div>
+        <div class="item"><a href="/locations">Locations</a></div>
+        <div class="item"><a href="/surveys">Surveys</a></div>
+    </nav>
 <% end %>
-</div>
+
 <div class="notice"><%= @notice %></div>
-     <%= yield %>
+</header>
+
+<body>
+    <%= yield %>
 </body>
+
+
 </html>
