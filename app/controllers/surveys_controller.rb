@@ -1,8 +1,10 @@
 class SurveysController < ApplicationController
 
     get '/surveys' do 
+        
         if logged_in? 
             @surveys = Survey.all 
+            #replace with Survey.search - checks for params
             erb :"/surveys/index"
         else
             redirect '/'

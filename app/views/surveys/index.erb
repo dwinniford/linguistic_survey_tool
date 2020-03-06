@@ -4,11 +4,16 @@
         <h1>All Surveys</h1>
     </header>
     <main>
+        <form action="/surveys" method="get">
+            <input type="text" name="q">
+            <input type="submit" value="search">
+        </form>
     <ol>
         <% @surveys.each do |survey| %>
             <li>Name: <%= survey.name %>, Location: <%= survey.location.complete_name %> <a href="/surveys/<%= survey.id %>" type=><button>View Survey</button></a></li>
         <% end %>
     </ol>
     </main>
+
 
 </html>
