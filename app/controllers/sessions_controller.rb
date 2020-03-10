@@ -6,7 +6,6 @@ class SessionsController < ApplicationController
 
     get '/signup' do 
         if logged_in? 
-            # @notice = "You are already logged in."  use flash?
             redirect '/surveys'
         else 
             @user = User.new
@@ -34,14 +33,14 @@ class SessionsController < ApplicationController
         end
     end 
 
-    post '/login' do   #refactor into helper methods? 
+    post '/login' do   
         if !params_empty? 
             user = User.find_by_name(params[:name])
             if user && user.authenticate(params[:password])
                 session[:id] = user.id
                 redirect '/surveys'
             else 
-                raise user.errors.inspect
+                #raise user.errors.inspect
                 @notice = "Invalid username or password."
                 erb :'/sessions/login'
             end 

@@ -1,10 +1,8 @@
 class SurveysController < ApplicationController
 
     get '/surveys' do 
-        
         if logged_in? 
             @surveys = Survey.all 
-            #replace with Survey.search - checks for params
             erb :"/surveys/index"
         else
             redirect '/'
@@ -25,7 +23,6 @@ class SurveysController < ApplicationController
     post '/surveys' do 
         if  logged_in?
             @survey = Survey.new(params["survey"])
-            # params["survey"]["location"]
             location = Location.find_by(params["location"])
             if location 
                 @survey.location= location 
@@ -100,7 +97,7 @@ class SurveysController < ApplicationController
                 erb :"/surveys/show"
             end 
         else 
-            redirect '/' # or display anti hacker page
+            redirect '/' 
         end 
 
     end
