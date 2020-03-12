@@ -1,3 +1,7 @@
 <h1> Welcome to your home screen</h1>
 <p>You are logged in as <%=@user.name %></p>
-
+<ol>
+            <% @user.surveys.each do |survey| %>
+                <li>Name: <%= survey.name %>, Location: <%= survey.location.complete_name %> <a href="/surveys/<%= survey.id %>" type=><button>View Survey</button></a></li>
+            <% end %>
+        </ol>
